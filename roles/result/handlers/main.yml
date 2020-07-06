@@ -1,0 +1,5 @@
+- name: restart-result
+  systemd:
+    name: result
+    state: restarted
+    daemon_reload: yes

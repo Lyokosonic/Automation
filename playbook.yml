@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: root
+  roles:
+    - base
+    - { role: redis, when: "inventory_hostname in groups ['redis']" }
+    - { role: postgresql, when: "inventory_hostname in groups ['postgresql']" }
+    - { role: worker, when: "inventory_hostname in groups ['worker']" }
+    - { role: poll, when: "inventory_hostname in groups ['poll']" }
+    - { role: result, when: "inventory_hostname in groups ['result']" }

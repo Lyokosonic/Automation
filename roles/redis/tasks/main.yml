@@ -1,0 +1,19 @@
+- name: Install redis
+  apt:
+    state: latest
+    pkg:
+      - redis-server
+      - php-redis
+
+- name: Make sure redis is running and enabled
+  systemd:
+    name: redis-server
+    state: started
+    enabled: yes
+
+- name: Copy redis.conf file
+  copy:
+    src: "../files/redis.conf"
+    dest: /etc/redis/redis.conf
+  notify:
+    - restart-redis

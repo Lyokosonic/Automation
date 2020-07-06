@@ -1,0 +1,28 @@
+- name: Upgrade Debian
+  apt:
+    update_cache: yes
+    upgrade: dist
+    cache_valid_time: "3600"
+
+- name: Install base packages
+  apt:
+    pkg:
+      - sudo
+      - curl
+      - python-pycurl
+      - htop
+      - zsh
+      - tree
+      - apt-transport-https
+      - ca-certificates
+      - emacs-nox
+      - git
+      - unzip
+      - make
+      - build-essential
+      - wget
+      - gnupg2
+
+- name: Set Timezone to Europe/France
+  timezone:
+    name: Europe/Paris

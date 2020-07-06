@@ -1,0 +1,29 @@
+- name: Install NodeJS and npm
+  apt:
+    pkg: nodejs, npm
+    state: present
+    update_cache: yes
+
+- name: Untar the result file
+  unarchive:
+    src: "../../../result.tar"
+    dest: "~/"
+
+- name: Copy template result service
+  template:
+    src: "../files/result.service"
+    dest: "/lib/systemd/system/result.service"
+  notify:
+    - restart-result
+
+- name: Install node packages
+  npm:
+    path: "~/result"
+  notify:
+    - restart-result
+
+- name: Start result service and enable it
+  systemd:
+    enabled: true
+    name: result
+    state: started

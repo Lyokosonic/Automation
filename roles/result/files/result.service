@@ -1,0 +1,18 @@
+[Unit]
+Description=Result nodeJS project
+After=network.target
+
+[Service]
+Environment=PORT="{{ RESULT_PORT }}"
+Environment=POSTGRESQL_USER="{{ DB_USER }}"
+Environment=POSTGRESQL_PASSWORD="{{ DB_PASSWORD }}"
+Environment=POSTGRESQL_HOST="{{ DB_HOST }}"
+Environment=POSTGRESQL_PORT="{{ DB_PORT }}"
+Environment=POSTGRESQL_DB="{{ DB_NAME }}"
+Type=simple
+User=root
+ExecStart=/usr/bin/node /root/result/server.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
